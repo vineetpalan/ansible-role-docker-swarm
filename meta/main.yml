@@ -1,6 +1,6 @@
 galaxy_info:
   author: Leon Kura
-  role_name: Docker Swarm
+  role_name: docker-swarm
   description: Initialize Swarm & add managers + workers
   company: smartup solutions GmbH
 
