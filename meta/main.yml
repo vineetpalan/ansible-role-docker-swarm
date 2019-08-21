@@ -1,0 +1,25 @@
+galaxy_info:
+  author: Leon Kura
+  description: Initialize Swarm & add managers + workers
+  company: smartup solutions GmbH
+
+  issue_tracker_url: https://github.com/leonkura/ansible-role-docker-swarm/issues
+
+  license: GPL-3.0-only
+
+  min_ansible_version: 2.4
+
+  platforms:
+    - name: Ubuntu
+      versions:
+        - all
+    - name: Debian
+      versions:
+        - all
+
+
+  galaxy_tags:
+    - docker
+    - swarm
+
+dependencies: []

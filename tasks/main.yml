@@ -1,0 +1,28 @@
+---
+- name: Install the Docker Python Module
+  apt:
+    name: python3-docker
+    state: present
+
+- name: Initialize the Swarm
+  docker_swarm:
+    advertise_addr: "{{ docker_swarm_advertise_address }}"
+    state: present
+  register: docker_swarm_init
+  when: inventory_hostname == docker_swarm_manager_init
+
+- name: Join Manager Nodes to the Swarm
+  docker_swarm:
+    advertise_addr: "{{ docker_swarm_advertise_address }}"
+    remote_addrs: [ "{{ docker_swarm_remote_address }}" ]
+    join_token: "{{ hostvars[docker_swarm_manager_init]['docker_swarm_init']['swarm_facts']['JoinTokens']['Manager'] }}"
+    state: join
+  when: inventory_hostname in groups[docker_swarm_managers_group]
+
+- name: Join Worker Nodes to the Swarm
+  docker_swarm:
+    advertise_addr: "{{ docker_swarm_advertise_address }}"
+    remote_addrs: [ "{{ docker_swarm_remote_address }}" ]
+    join_token: "{{ hostvars[docker_swarm_manager_init]['docker_swarm_init']['swarm_facts']['JoinTokens']['Worker'] }}"
+    state: join
+  when: inventory_hostname in groups[docker_swarm_workers_group]

@@ -1,0 +1,18 @@
+---
+# The Ansible group Swarm managers belong to
+docker_swarm_managers_group: docker_swarm_managers
+
+# The single manager the Swarm should be initialized on
+docker_swarm_manager_init: "{{ groups[docker_swarm_managers_group][0] }}"
+
+# The Ansible group Swarm workers belong to
+docker_swarm_workers_group: docker_swarm_workers
+
+# The network to which the swarm advertise address (--advertise-addr) belongs to
+docker_swarm_advertise_address_cidr: 10.0.0.0/8
+
+# The advertise address swarm managers & workers should use
+docker_swarm_advertise_address: "{{ hostvars[inventory_hostname]['ansible_all_ipv4_addresses'] | ipaddr(docker_swarm_advertise_address_cidr) | first }}"
+
+# The remote address swarm workers should use
+docker_swarm_remote_address: "{{ hostvars[docker_swarm_manager_init]['ansible_all_ipv4_addresses'] | ipaddr(docker_swarm_advertise_address_cidr) | first }}"
