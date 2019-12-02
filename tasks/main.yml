@@ -1,4 +1,10 @@
 ---
+- name: Remove docker-py pip module
+  pip: name=docker-py state=absent
+
+- name: Install docker pip module
+  pip: name=docker
+
 - name: Initialize the Swarm
   docker_swarm:
     advertise_addr: "{{ docker_swarm_advertise_address }}"
