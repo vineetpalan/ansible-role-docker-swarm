@@ -1,9 +1,4 @@
 ---
-- name: Install the Docker Python Module
-  apt:
-    name: python3-docker
-    state: present
-
 - name: Initialize the Swarm
   docker_swarm:
     advertise_addr: "{{ docker_swarm_advertise_address }}"
