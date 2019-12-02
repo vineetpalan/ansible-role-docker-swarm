@@ -11,13 +11,9 @@ galaxy_info:
   min_ansible_version: 2.4
 
   platforms:
-    - name: Ubuntu
+    - name: EL
       versions:
-        - all
-    - name: Debian
-      versions:
-        - all
-
+        - 7
 
   galaxy_tags:
     - docker
